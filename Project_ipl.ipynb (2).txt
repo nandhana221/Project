@@ -1,0 +1,81 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": []
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "code",
+      "source": [
+        "# Importing Libraries\n",
+        "import pandas as pd\n",
+        "import matplotlib.pyplot as plt\n",
+        "import seaborn as sns\n",
+        "\n",
+        "# Realistic IPL Sample Data\n",
+        "data = {\n",
+        "    'season': [2023, 2023, 2022, 2022, 2021, 2021, 2020, 2020, 2019],\n",
+        "    'team1': ['MI', 'RCB', 'CSK', 'DC', 'KKR', 'SRH', 'RR', 'PBKS', 'GT'],\n",
+        "    'team2': ['CSK', 'MI', 'RCB', 'MI', 'DC', 'RCB', 'MI', 'KKR', 'LSG'],\n",
+        "    'winner': ['CSK', 'RCB', 'CSK', 'MI', 'DC', 'RCB', 'MI', 'KKR', 'GT'],\n",
+        "    'city': ['Mumbai', 'Bangalore', 'Chennai', 'Delhi', 'Kolkata', 'Hyderabad', 'Jaipur', 'Ahmedabad', 'Lucknow'],\n",
+        "    'player_of_match': ['Ruturaj Gaikwad', 'Faf du Plessis', 'Moeen Ali', 'Suryakumar Yadav', 'Prithvi Shaw',\n",
+        "                        'Glenn Maxwell', 'Jasprit Bumrah', 'Andre Russell', 'Shubman Gill'],\n",
+        "    'runs_scored': [218, 190, 205, 198, 210, 187, 199, 202, 215],\n",
+        "}\n",
+        "\n",
+        "# Create DataFrame\n",
+        "ipl_df = pd.DataFrame(data)\n",
+        "\n",
+        "# 1. Basic Exploration\n",
+        "print(\"Data Info:\")\n",
+        "print(ipl_df.info())\n",
+        "print(\"\\nFirst 5 Rows:\")\n",
+        "print(ipl_df.head())\n",
+        "\n",
+        "# 2. Team Performance\n",
+        "team_wins = ipl_df['winner'].value_counts()\n",
+        "print(\"\\nTeam Wins:\\n\", team_wins)\n",
+        "\n",
+        "# 3. Player of the Match Counts\n",
+        "player_of_match_counts = ipl_df['player_of_match'].value_counts()\n",
+        "print(\"\\nPlayer of the Match Counts:\\n\", player_of_match_counts)\n",
+        "\n",
+        "# 4. Average Runs Analysis\n",
+        "average_runs_per_match = ipl_df['runs_scored'].mean()\n",
+        "print(f\"\\nAverage Runs Scored per Match: {average_runs_per_match:.1f}\")\n",
+        "\n",
+        "# 5. Bar Chart of Team Wins\n",
+        "plt.figure(figsize=(10, 6))\n",
+        "sns.countplot(x='winner', data=ipl_df, order=team_wins.index, palette='viridis')\n",
+        "plt.title('Number of Wins by Team')\n",
+        "plt.xlabel('Team')\n",
+        "plt.ylabel('Number of Wins')\n",
+        "plt.show()\n",
+        "\n",
+        "# 6. Histogram of Runs\n",
+        "plt.figure(figsize=(8, 5))\n",
+        "plt.hist(ipl_df['runs_scored'], bins=6, color='skyblue', edgecolor='black')\n",
+        "plt.title('Distribution of Runs Scored per Match')\n",
+        "plt.xlabel('Runs Scored')\n",
+        "plt.ylabel('Frequency')\n",
+        "plt.show()"
+      ],
+      "metadata": {
+        "id": "UFhiFu4Tr2Qy"
+      },
+      "execution_count": null,
+      "outputs": []
+    }
+  ]
+}
